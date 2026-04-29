@@ -1,5 +1,4 @@
 import os
-import shutil
 import uuid
 from pathlib import Path
 from flask import Flask, render_template, request, jsonify, send_from_directory
@@ -13,9 +12,11 @@ UPLOAD_DIR = Path(__file__).parent / "uploads"
 @app.before_request
 def init_once():
     if not hasattr(app, "_initialized"):
-        if UPLOAD_DIR.exists():
-            shutil.rmtree(UPLOAD_DIR)
         UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
+        # 清理旧文件
+        for f in UPLOAD_DIR.iterdir():
+            if f.is_file():
+                f.unlink()
         # 预加载 OCR 模型
         get_ocr()
         app._initialized = True
