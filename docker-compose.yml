@@ -1,0 +1,20 @@
+services:
+  translate:
+    build: .
+    container_name: image-translate
+    ports:
+      - "5000:5000"
+    volumes:
+      - upload-data:/app/uploads
+    restart: unless-stopped
+    environment:
+      - PYTHONUNBUFFERED=1
+    # 首次启动需要下载 OCR 模型，可能需要较长时间
+    # 模型会自动缓存到 ~/.paddlex 目录
+    deploy:
+      resources:
+        limits:
+          memory: 4G
+
+volumes:
+  upload-data:

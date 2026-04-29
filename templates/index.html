@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>图片翻译工具</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- 顶部栏 -->
+        <header class="top-bar">
+            <h1 class="logo">图片翻译</h1>
+            <div class="controls">
+                <label for="lang-select">目标语言：</label>
+                <select id="lang-select">
+                    <option value="en">英语</option>
+                    <option value="vi" selected>越南语</option>
+                    <option value="fr">法语</option>
+                    <option value="de">德语</option>
+                    <option value="th">泰语</option>
+                    <option value="id">印尼语</option>
+                    <option value="ja">日语</option>
+                </select>
+                <button id="translate-btn" class="btn-primary" disabled>开始翻译</button>
+            </div>
+        </header>
+
+        <!-- 主内容区 -->
+        <main class="main-content">
+            <!-- 上传区 -->
+            <section class="panel upload-panel">
+                <h2 class="panel-title">上传图片</h2>
+                <div id="drop-zone" class="drop-zone">
+                    <div class="drop-icon">
+                        <svg width="48" height="48" viewBox="0 0 48 48" fill="none"><path d="M24 32V12m0 0l-8 8m8-8l8 8" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M40 32v4a4 4 0 01-4 4H12a4 4 0 01-4-4v-4" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </div>
+                    <p class="drop-text">拖拽图片到此处</p>
+                    <p class="drop-subtext">或点击下方按钮选择文件</p>
+                    <p class="drop-hint">支持 PNG / JPG / WebP</p>
+                    <button type="button" id="select-btn" class="btn-select">选择文件</button>
+                    <input type="file" id="file-input" multiple accept="image/png,image/jpeg,image/webp,image/bmp" hidden>
+                </div>
+                <div id="upload-preview" class="preview-grid"></div>
+            </section>
+
+            <!-- 结果区 -->
+            <section class="panel result-panel">
+                <h2 class="panel-title">翻译结果 <span class="panel-hint">点击图片可放大查看</span></h2>
+                <div class="batch-bar" id="batch-bar">
+                    <div class="batch-bar-left">
+                        <button class="batch-btn" id="select-all-btn">全选</button>
+                        <button class="batch-btn" id="deselect-all-btn">取消</button>
+                        <span id="selected-count">已选 0/0</span>
+                    </div>
+                    <button class="batch-btn primary" id="batch-download-btn" disabled>下载选中</button>
+                </div>
+                <div id="result-area" class="result-area">
+                    <div id="result-placeholder" class="placeholder">
+                        <div class="placeholder-icon">
+                            <svg width="48" height="48" viewBox="0 0 48 48" fill="none"><path d="M24 4C12.954 4 4 12.954 4 24s8.954 20 20 20 20-8.954 20-20S35.046 4 24 4z" stroke="currentColor" stroke-width="2" opacity="0.3"/><path d="M16 20l6 6 10-12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </div>
+                        <p>上传并翻译图片后，结果将显示在这里</p>
+                    </div>
+                    <div id="result-grid" class="preview-grid" style="display:none;"></div>
+                </div>
+            </section>
+        </main>
+
+        <!-- 大图预览弹窗 -->
+        <div id="preview-modal" class="preview-modal" style="display:none;">
+            <div class="preview-modal-backdrop"></div>
+            <div class="preview-modal-content">
+                <button class="preview-close" id="preview-close">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M5 5l10 10M15 5L5 15" stroke="white" stroke-width="2" stroke-linecap="round"/></svg>
+                </button>
+                <img id="preview-image" src="" alt="预览">
+                <a id="preview-download" class="preview-download-btn" href="" download>下载原图</a>
+            </div>
+        </div>
+
+        <!-- 加载遮罩 -->
+        <div id="loading-overlay" class="loading-overlay" style="display:none;">
+            <div class="loading-content">
+                <div class="spinner"></div>
+                <p id="loading-text">正在处理...</p>
+                <p id="loading-progress"></p>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>
