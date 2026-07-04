@@ -12,16 +12,19 @@ from deep_translator import GoogleTranslator
 from PIL import Image, ImageDraw, ImageFont
 
 
-LANGUAGE_MAP = {
-    "en": "en",
-    "vi": "vi",
-    "fr": "fr",
-    "de": "de",
-    "th": "th",
-    "id": "id",
-    "ja": "ja",
+# UI 标签（用户在界面上看到的语言名）
+LANGUAGE_NAME = {
+    "en": "英语",
+    "vi": "越南语",
+    "fr": "法语",
+    "de": "德语",
+    "th": "泰语",
+    "id": "印尼语",
+    "ja": "日语",
 }
 
+# 后端目标语言代码 -> GoogleTranslator 的目标代码
+LANGUAGE_MAP = {code: code for code in LANGUAGE_NAME}
 _ocr_instance = None
 
 

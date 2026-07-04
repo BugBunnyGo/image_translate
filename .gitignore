@@ -1,6 +1,12 @@
----.omc/
+.omc/
 uploads/
 __pycache__/
 *.pyc
 .env
 node_modules/
+# 调试产物与本地样本（不应进入仓库）
+debug_*.html
+debug_*.png
+archive/
+images/
+</input>

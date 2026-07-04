@@ -14,15 +14,13 @@
             <div class="controls">
                 <label for="lang-select">目标语言：</label>
                 <select id="lang-select">
-                    <option value="en">英语</option>
-                    <option value="vi" selected>越南语</option>
-                    <option value="fr">法语</option>
-                    <option value="de">德语</option>
-                    <option value="th">泰语</option>
-                    <option value="id">印尼语</option>
-                    <option value="ja">日语</option>
+                {% for code, name in languages.items() %}
+                    <option value="{{ code }}">{{ name }}</option>
+                {% endfor %}
                 </select>
                 <button id="translate-btn" class="btn-primary" disabled>开始翻译</button>
+                </div>
+
             </div>
         </header>
 

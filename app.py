@@ -2,9 +2,7 @@ import os
 import uuid
 from pathlib import Path
 from flask import Flask, render_template, request, jsonify, send_from_directory
-from translate_engine.engine import translate_image, LANGUAGE_MAP, get_ocr
-
-app = Flask(__name__)
+from translate_engine.engine import translate_image, LANGUAGE_MAP, LANGUAGE_NAME, get_ocr
 
 UPLOAD_DIR = Path(__file__).parent / "uploads"
 
@@ -24,7 +22,7 @@ def init_once():
 
 @app.route("/")
 def index():
-    return render_template("index.html", languages=LANGUAGE_MAP)
+    return render_template("index.html", languages=LANGUAGE_NAME)
 
 
 @app.route("/api/translate", methods=["POST"])

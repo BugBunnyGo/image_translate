@@ -6,4 +6,5 @@ numpy==2.3.2
 pillow==12.2.0
 paddlepaddle==3.0.0
 paddleocr==3.5.0
-paddlex==3.5.1
+
+</input>
